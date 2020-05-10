@@ -70,6 +70,12 @@ class Cli:
       except json.JSONDecodeError:
         print(l)
         continue
+
+  @staticmethod
+  def get_config():
+    config = github_util.get_yaml(owner="kubeflow", repo=".github")
+    print(json.dumps(config, indent=4, sort_keys=True))
+
 if __name__ == "__main__":
   logging.basicConfig(level=logging.INFO,
                       format=('%(levelname)s|%(asctime)s'
