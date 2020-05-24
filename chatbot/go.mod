@@ -11,6 +11,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.6.0
 	github.com/sirupsen/logrus v1.6.0
+	github.com/slack-go/slack v0.6.4
 	github.com/square/go-jose/v3 v3.0.0-20200430180204-d84c719419c2
 	github.com/tidwall/gjson v1.6.0 // indirect
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859
