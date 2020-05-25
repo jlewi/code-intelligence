@@ -6,7 +6,7 @@ metadata:
     skaffold.dev/builder: cluster
     skaffold.dev/cleanup: "true"
     skaffold.dev/deployer: kustomize
-    skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
+    skaffold.dev/run-id: 406a4583-29f1-4612-a93a-fc2fe7fe9d8e
     skaffold.dev/tag-policy: git-commit
     skaffold.dev/tail: "true"
   name: server
@@ -29,7 +29,7 @@ metadata:
     skaffold.dev/builder: cluster
     skaffold.dev/cleanup: "true"
     skaffold.dev/deployer: kustomize
-    skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
+    skaffold.dev/run-id: 406a4583-29f1-4612-a93a-fc2fe7fe9d8e
     skaffold.dev/tag-policy: git-commit
     skaffold.dev/tail: "true"
   name: server
@@ -47,7 +47,7 @@ spec:
         skaffold.dev/builder: cluster
         skaffold.dev/cleanup: "true"
         skaffold.dev/deployer: kustomize
-        skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
+        skaffold.dev/run-id: 406a4583-29f1-4612-a93a-fc2fe7fe9d8e
         skaffold.dev/tag-policy: git-commit
         skaffold.dev/tail: "true"
     spec:
@@ -56,7 +56,7 @@ spec:
         - /server
         - --area-config-path=https://raw.githubusercontent.com/kubeflow/community/master/labels-owners.yaml
         - --port=80
-        image: gcr.io/issue-label-bot-dev/chatbot/server:6f0ce81-dirty@sha256:cfcdf91cf9a21880eba2b8c534594d3e1f86277775501f3149cc9f362341d2f5
+        image: gcr.io/issue-label-bot-dev/chatbot/server:f79c186-dirty@sha256:29c8bdf3a16d47906f685fcf9e14d0bfff9067ff200d6b366c98f886d21fdfa1
         name: management-context
 ---
 apiVersion: networking.istio.io/v1alpha3
@@ -67,7 +67,7 @@ metadata:
     skaffold.dev/builder: cluster
     skaffold.dev/cleanup: "true"
     skaffold.dev/deployer: kustomize
-    skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
+    skaffold.dev/run-id: 406a4583-29f1-4612-a93a-fc2fe7fe9d8e
     skaffold.dev/tag-policy: git-commit
     skaffold.dev/tail: "true"
   name: server

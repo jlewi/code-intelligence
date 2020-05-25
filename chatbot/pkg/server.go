@@ -207,6 +207,7 @@ func (s *kubeflowInfoServer) HandleWebhook(ctx context.Context, req dfext.Webhoo
 	//
 	// TODO(jlewi): What we really want to do use send a prediction to attach labels to the question and
 	// then map it to the area?
+	log.Infof("Recieved: intent: %v, from source: %v,", req.QueryResult.Intent.DisplayName, req.OriginalDetectIntentRequest.Source)
 	log.Infof("Recieved request:%v", util.PrettyPrint(req))
 
 	res := &dfext.WebhookResponse{
