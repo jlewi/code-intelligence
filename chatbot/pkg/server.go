@@ -31,6 +31,16 @@ var (
 
 const (
 	DialogFlowWebhookPath = "/dialogflow/webhook"
+	// The value Dialogflow attaches to events from slack
+	slackSource = "slack"
+)
+
+var (
+	// Intents that should be skipped for slack
+	slackSkippedIntents = map[string]string {
+		"Default Fallback Intent": "",
+		"Default Welcome Intent": "",
+	}
 )
 
 // kubeflowInfoServer provides information about Kubeflow.
@@ -201,6 +211,13 @@ func (s *kubeflowInfoServer) HandleWebhook(ctx context.Context, req dfext.Webhoo
 
 	res := &dfext.WebhookResponse{
 		FulfillmentMessages: []dfext.Message{},
+	}
+
+	if req.OriginalDetectIntentRequest.Source == slackSource {
+		if _, ok := slackSkippedIntents[req.QueryResult.Intent.DisplayName]; ok {
+			log.Infof("Skipping intent %v", req.QueryResult.Intent.DisplayName)
+			return res, nil
+		}
 	}
 
 	labels := s.labels.matchLabels(req.QueryResult.Parameters)

@@ -6,7 +6,7 @@ metadata:
     skaffold.dev/builder: cluster
     skaffold.dev/cleanup: "true"
     skaffold.dev/deployer: kustomize
-    skaffold.dev/run-id: 42606913-27f1-443a-9b4f-dcfdd5c40100
+    skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
     skaffold.dev/tag-policy: git-commit
     skaffold.dev/tail: "true"
   name: server
@@ -29,7 +29,7 @@ metadata:
     skaffold.dev/builder: cluster
     skaffold.dev/cleanup: "true"
     skaffold.dev/deployer: kustomize
-    skaffold.dev/run-id: 42606913-27f1-443a-9b4f-dcfdd5c40100
+    skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
     skaffold.dev/tag-policy: git-commit
     skaffold.dev/tail: "true"
   name: server
@@ -47,7 +47,7 @@ spec:
         skaffold.dev/builder: cluster
         skaffold.dev/cleanup: "true"
         skaffold.dev/deployer: kustomize
-        skaffold.dev/run-id: 42606913-27f1-443a-9b4f-dcfdd5c40100
+        skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
         skaffold.dev/tag-policy: git-commit
         skaffold.dev/tail: "true"
     spec:
@@ -56,7 +56,7 @@ spec:
         - /server
         - --area-config-path=https://raw.githubusercontent.com/kubeflow/community/master/labels-owners.yaml
         - --port=80
-        image: gcr.io/issue-label-bot-dev/chatbot/server:a5a6bfe@sha256:722f52774c1c3842f12b603549b905ce6f4e4a0a6122b009af2adacd7f8180c6
+        image: gcr.io/issue-label-bot-dev/chatbot/server:6f0ce81-dirty@sha256:cfcdf91cf9a21880eba2b8c534594d3e1f86277775501f3149cc9f362341d2f5
         name: management-context
 ---
 apiVersion: networking.istio.io/v1alpha3
@@ -67,7 +67,7 @@ metadata:
     skaffold.dev/builder: cluster
     skaffold.dev/cleanup: "true"
     skaffold.dev/deployer: kustomize
-    skaffold.dev/run-id: 42606913-27f1-443a-9b4f-dcfdd5c40100
+    skaffold.dev/run-id: 176fd38e-5b3e-4398-9094-613f941cc9c0
     skaffold.dev/tag-policy: git-commit
     skaffold.dev/tail: "true"
   name: server
@@ -88,4 +88,3 @@ spec:
         host: server.chatbot-dev.svc.cluster.local
         port:
           number: 80
-r: 80
