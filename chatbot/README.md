@@ -34,6 +34,9 @@ This requires the following modifications
  * Set the path to "/healthz/ready"
  * Set the target port to the node port mapped to the istio status-port
 
+ TODO(jlewi): Using Dialogflow [mutual TLS](https://cloud.google.com/dialogflow/docs/fulfillment-mtls) would probably
+ be better.
+
 ### Authorization using manual JWTs
 
 We need to modify the security policy applied at the ingress gateway so that it won't reject requests without a valid
@@ -116,7 +119,17 @@ To test the webhook path
 curl https://code-intelligence.endpoints.issue-label-bot-dev.cloud.goog/chatbot/dev/dialogflow/webhook -H "Authorization: Bearer ${CHATBOTJWT}" -d '{}' -H "Content-Type: application/json" 
 ```
 
+## Dialogflow Fulfillment
+
+In the UI you can click on the diagnostic tab to see the request and response from the webhook.
+
 ## Referencess
+
+Slack
+
+* [Slack threaded message terminology](https://api.slack.com/messaging/managing#threading)
+
+ISTIO 
 
 * [ISTIO 1.1 Policy Resource](https://archive.istio.io/v1.1/docs/reference/config/istio.authentication.v1alpha1/#Policy)
 * [ISTIO 1.5 JWT policy example](https://istio.io/docs/tasks/security/authorization/authz-jwt/)
