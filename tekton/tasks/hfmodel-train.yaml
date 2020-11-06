@@ -28,5 +28,9 @@ spec:
     command:
     - python
     - -m
-    - label_microservice.hfmodel_train
+    - label_microservice.hf_model
     - train
+    command:
+    - tail
+    - -f 
+    - /dev/null

@@ -9,7 +9,7 @@ from code_intelligence import gcs_util
 import io
 from sklearn import model_selection
 import numpy as np
-import datettime
+import datetime
 import pandas as pd
 
 from simpletransformers.classification import ClassificationModel, ClassificationArgs
@@ -66,10 +66,26 @@ class HFModel:
     return files
 
   @staticmethod
-  def train(use_cuda=True):
-    """* Use [simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers/tree/master/simpletransformers/classification) which is built ontop of HuggingFace
-       * You can check out this [example](https://github.com/huggingface/transformers/blob/master/examples/text-classification/run_glue.py) which just uses HuggingFace
-       * This code is based on the vscode [issue label model](https://github.com/microsoft/vscode-github-triage-actions/blob/master/classifier-deep/train/vm-filesystem/classifier/generateModels.py)"""
+  def train(use_cuda=True, max_issues=0):
+    """Train a model using hugging face.
+
+       args:
+        max_issues: If supplied use at most this many issues
+          this is purely to subsample the data to make it run quickly.
+
+       This uses the simpletransformers library
+       https://github.com/ThilinaRajapakse/simpletransformers/tree/master/simpletransformers/classification
+       which is built ontop of HuggingFace
+
+       This code is based on the vscode issue label model
+       https://github.com/microsoft/vscode-github-triage-actions/blob/master/classifier-deep/train/vm-filesystem/classifier/generateModels.py)"""
+
+    files = HFModel.load_data()
+
+    if max_issues:
+      logging.info(f"Truncating files to first {max_issues} rows")
+      files = files[:max_issues]
+
     # split the data into train and test sets
     train_files, val_files = model_selection.train_test_split(files, test_size=.2)
 

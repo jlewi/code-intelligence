@@ -4,6 +4,17 @@ metadata:
   generateName: hftrain-
   namespace: label-bot-dev
 spec:
+  resources:
+    inputs:
+      - name: source
+        resourceSpec:
+          type: git
+          params:
+            - name: url
+              value: https://github.com/jlewi/code-intelligence.git
+            - name: revision
+              value: huggingface
   taskRef:
     name: hfmodel-train
+  # Use a KSA with workload identity
   serviceAccountName: default-editor
