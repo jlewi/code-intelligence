@@ -1,6 +1,7 @@
 """Build a classification model with hugging face."""
 
 import fire
+import functools
 import logging
 import torch
 from google.cloud import storage
@@ -32,16 +33,20 @@ def f1_multiclass(labels, preds):
 
 class HFModel:
   @staticmethod
-  def load_data(files_list=DEFAULT_FILE_LIST):
+  def load_data(files_list=DEFAULT_FILE_LIST, max_issues=0):
     storage_client = storage.Client()
     bucket_name, obj_path = gcs_util.split_gcs_uri(files_list)
     b = storage_client.bucket(bucket_name)
     o = b.blob(obj_path)
 
     csv_contents = o.download_as_string()
-    files = pd.read_csv(io.BytesIO(csv_contents), names=["garbage", "file", "labels"])
+    files = pd.read_csv(io.BytesIO(csv_contents), names=["garbage", "file", "labels_raw"])
 
     files["text"] = ""
+
+    if max_issues:
+      logging.info(f"Truncating files to first {max_issues} rows")
+      files = files[:max_issues]
 
     # Compute the number of items related to progress
     percent_interval = 1
@@ -79,15 +84,11 @@ class HFModel:
 
        This code is based on the vscode issue label model
        https://github.com/microsoft/vscode-github-triage-actions/blob/master/classifier-deep/train/vm-filesystem/classifier/generateModels.py)"""
-
-    files = HFModel.load_data()
-
-    if max_issues:
-      logging.info(f"Truncating files to first {max_issues} rows")
-      files = files[:max_issues]
+    logging.info("load data")
+    files = HFModel.load_data(max_issues=max_issues)
 
     # split the data into train and test sets
-    train_files, val_files = model_selection.train_test_split(files, test_size=.2)
+    train_df, test_df = model_selection.train_test_split(files, test_size=.2)
 
     # Generate a unique list of labels
     target_labels = functools.reduce(np.union1d, files["labels"].values)
