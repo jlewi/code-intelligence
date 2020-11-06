@@ -6,14 +6,14 @@ metadata:
 spec:
   resources:
     inputs:
-      - name: source
-        resourceSpec:
-          type: git
-          params:
-            - name: url
-              value: https://github.com/jlewi/code-intelligence.git
-            - name: revision
-              value: huggingface
+    - name: source
+      resourceSpec:
+        type: git
+        params:
+        - name: url
+          value: https://github.com/jlewi/code-intelligence.git
+        - name: revision
+          value: huggingface
   taskRef:
     name: hfmodel-train
   # Use a KSA with workload identity

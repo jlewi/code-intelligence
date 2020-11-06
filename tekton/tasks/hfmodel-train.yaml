@@ -9,17 +9,17 @@ metadata:
     # This gets passed down to the individual pods
     sidecar.istio.io/inject: "false"
 spec:
-  params:  
+  params:
   - name: train-image
-    type: string    
-    default: gcr.io/issue-label-bot-dev/hf-trainer:1c1edaf-dirty
+    type: string
+    default: gcr.io/issue-label-bot-dev/hf-trainer:6320d32-dirty@sha256:e150ccf4df2977aedc8c11b60a610824d374a79dfed732b0a481a05a3b989cbb # {"$kpt-set":"hf-trainer-image"}
     description: The docker image to use as the trainer.
   resources:
     inputs:
     - name: source
       type: git
       description: The GitHub repo containing the source code
-  steps:  
+  steps:
   - name: train
     image: $(inputs.params.train-image)
     env:
@@ -32,5 +32,5 @@ spec:
     - train
     command:
     - tail
-    - -f 
+    - -f
     - /dev/null

@@ -1,0 +1,35 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: .
+packageMetadata:
+  shortDescription: sample description
+openAPI:
+  definitions:
+    io.k8s.cli.substitutions.hf-trainer-image:
+      x-k8s-cli:
+        substitution:
+          name: hf-trainer-image
+          pattern: ${hf-trainer-image}
+          values:
+          - marker: ${hf-trainer-image}
+            ref: '#/definitions/io.k8s.cli.setters.hf-trainer-image'
+    io.k8s.cli.setters.hf-trainer-image:
+      x-k8s-cli:
+        setter:
+          name: hf-trainer-image
+          value: gcr.io/issue-label-bot-dev/hf-trainer:6320d32-dirty@sha256:e150ccf4df2977aedc8c11b60a610824d374a79dfed732b0a481a05a3b989cbb
+          isSet: true
+    io.k8s.cli.substitutions.prctl-image:
+      x-k8s-cli:
+        substitution:
+          name: prctl-image
+          pattern: ${prctl-image}
+          values:
+          - marker: ${prctl-image}
+            ref: '#/definitions/io.k8s.cli.setters.prctl-image'
+    io.k8s.cli.setters.prctl-image:
+      x-k8s-cli:
+        setter:
+          name: prctl-image
+          value: gcr.io/kubeflow-images-public/prctl:a1a488e@sha256:53b4e6ff048adf8a4f9afc623e533456c7ace944f9bf03c527f07e597c86ae8c
