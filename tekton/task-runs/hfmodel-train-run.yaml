@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: hftrain-
+  namespace: label-bot-dev
+spec:
+  taskRef:
+    name: hfmodel-train
+  serviceAccountName: default-editor

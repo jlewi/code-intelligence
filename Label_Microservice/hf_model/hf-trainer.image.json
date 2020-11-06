@@ -1,0 +1,1 @@
+{"builds":[{"imageName":"gcr.io/issue-label-bot-dev/hf-trainer","tag":"gcr.io/issue-label-bot-dev/hf-trainer:1c1edaf-dirty@sha256:ffe7622201e9eb3177a73ece709be59535fde3c739c210ae86986033ec18595b"}]}

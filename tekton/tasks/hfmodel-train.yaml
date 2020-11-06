@@ -1,0 +1,32 @@
+# A Tekton Task to train a model using hugging face.
+#
+# Modifications are based on running kpt set 
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hfmodel-train
+  annotations:
+    # This gets passed down to the individual pods
+    sidecar.istio.io/inject: "false"
+spec:
+  params:  
+  - name: train-image
+    type: string    
+    default: gcr.io/issue-label-bot-dev/hf-trainer:1c1edaf-dirty
+    description: The docker image to use as the trainer.
+  resources:
+    inputs:
+    - name: source
+      type: git
+      description: The GitHub repo containing the source code
+  steps:  
+  - name: train
+    image: $(inputs.params.train-image)
+    env:
+    - name: PYTHONPATH
+      value: /workspace/$(inputs.resources.source.name)/py
+    command:
+    - python
+    - -m
+    - label_microservice.hfmodel_train
+    - train
